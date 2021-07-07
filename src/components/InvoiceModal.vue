@@ -123,6 +123,7 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import { uid } from "uid";
 export default {
     name: "invoiceModal",
     data() {
@@ -152,10 +153,33 @@ export default {
         invoiceTotal: 0,
         };
     },
+    created () {
+        this.invoiceDateUnix = Date.now();
+        this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString("en-us", this.dateOptions);
+    },
     methods: {
         ...mapMutations(["TOGGLE_INVOİCE"]),
         closeInvoice() {
         this.TOGGLE_INVOİCE();
+        },
+        addNewInvoiceItem() {
+            this.invoiceItemList.push({
+                id: uid(),
+                itemName: "",
+                qty: "",
+                price: 0,
+                total: 0,
+            })
+        },
+        deleteInvoiceItem (id) {
+            this.invoiceItemList = this.invoiceItemList.filter(item => item.id !== id)
+        },
+    },
+    watch: {
+        paymentTerms() {
+        const futureDate = new Date();
+        this.paymentDueDateUnix = futureDate.setDate(futureDate.getDate() + parseInt(this.paymentTerms));
+        this.paymentDueDate = new Date(this.paymentDueDateUnix).toLocaleDateString("en-us", this.dateOptions);
         },
     },
 }
