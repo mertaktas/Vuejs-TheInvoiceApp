@@ -37,6 +37,15 @@ export default {
     return {
       filterMenu: null,
     }
+  },
+  components: {
+
+  },
+  methods: {
+    newInvoice() {},
+    toggleFilterMenu () {
+      this.filterMenu = !this.filterMenu;
+    }
   }
 };
 </script>
