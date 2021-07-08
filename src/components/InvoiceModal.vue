@@ -123,10 +123,14 @@
 </template>
 <script>
 import db from "@/firebase/firebaseInit";
+import Loading from "@/components/Loading.vue";
 import { mapMutations } from "vuex";
 import { uid } from "uid";
 export default {
     name: "invoiceModal",
+    components: {
+      Loading,
+    },
     data() {
         return {
         dateOptions: { year: "numeric", month: "short", day: "numeric" },
@@ -192,6 +196,7 @@ export default {
             alert("Please ensure you filled out work items!");
             return;
           }
+          this.loading = true;
           this.calInvoiceTotal();
           const dataBase = db.collection("invoices").doc();
           await dataBase.set({
@@ -218,6 +223,7 @@ export default {
             invoiceDraft: this.invoiceDraft,
             invoicePaid: null,
           });
+          this.loading = false;
           this.TOGGLE_INVOİCE();
         },
         submitForm() {
