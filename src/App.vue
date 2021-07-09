@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div v-if="invoicesLoaded">
     <div v-if="!mobile" class="app flex flex-column">
       <Navigation />
       <div class="app-content flex flex-column">
         <Modal v-if="modalActive" />
         <transition name="invoice">
-          <InvoiceModal v-if="invoiceModal"/>
+          <InvoiceModal v-if="invoiceModal" />
         </transition>
         <router-view />
       </div>
@@ -16,11 +16,12 @@
     </div>
   </div>
 </template>
+
 <script>
-import { mapState, mapActions } from 'vuex'
-import Navigation from '@/components/Navigation.vue'
-import Modal from '@/components/Modal.vue'
-import InvoiceModal from '@/components/InvoiceModal.vue'
+import { mapState, mapActions } from "vuex";
+import Navigation from "./components/Navigation";
+import InvoiceModal from "./components/InvoiceModal";
+import Modal from "./components/Modal";
 export default {
   data() {
     return {
@@ -49,9 +50,9 @@ export default {
     },
   },
   computed: {
-    ...mapState(["invoiceModal","modalActive"])
-  }
-}
+    ...mapState(["invoiceModal", "modalActive", "invoicesLoaded"]),
+  },
+};
 </script>
 
 <style lang="scss">
