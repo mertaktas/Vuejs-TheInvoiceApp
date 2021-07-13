@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@mertaktas 
-johnkomarnicki
-/
-vue-invoice-app
-1
-125
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-vue-invoice-app/src/components/InvoiceModal.vue
-
-JohnRay1997 Completed App
-Latest commit d8364bf on 6 Jun
- History
- 0 contributors
-511 lines (451 sloc)  14.3 KB
-  
 <template>
   <div @click="checkClick" ref="invoiceWrap" class="invoice-wrap flex flex-column">
     <form @submit.prevent="submitForm" class="invoice-content">
